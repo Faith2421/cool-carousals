@@ -1,0 +1,113 @@
+
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bay Window Style Image Slider</title>
+
+</head>
+<style>
+.banner {
+    scroll-behavior: auto;
+    width:50%;
+    height:100vh;
+    align-items: center;
+    justify-self: center;
+    position: relative;
+    justify-content: space-between;
+
+ 
+
+}
+.banner .slider {
+    position:absolute;
+    width:200px;
+    height:250px;
+    top:10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform:perspective(1000px);
+    transition: transform 5s ease-in-out;
+}
+
+.banner .slider .item{
+    scroll-behavior: auto;
+     position:absolute;
+     inset: 0 0 0 0;
+     transform: 
+     rotateY(calc((var(--position) - 100) * (135/ var(--quantity)) * 1deg))
+     translateZ(550px); 
+     align-items: center;
+    justify-self: center;
+    transition: transform 1s ease-in-out;
+}
+
+.banner .slider .item img{
+    scroll-behavior: auto;
+    width:150px;
+    height:300px;
+    overflow-block: 10px;
+    align-items:center;
+    justify-self: center;
+    box-shadow: 0 0 
+                        0 0 30px #00ffff, 
+                        0 0 45px #00ffff, 
+                        0 0 60px #0088ff;;
+                
+    --flow-space:0.5em;
+    --hsl: var(hue),
+    var(--saturation),
+    var(--lightness),
+    
+
+}
+.slider .banner .slider {
+    transform: translateY(100px);
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    <div class="slider">
+      <div class="item" style="--position: 1"><img src="C:\Users\hp\Downloads\angola_texture.gif" alt=""></div>
+      <div class="item" style="--position: 2"><img src="C:\Users\hp\Downloads\namibia_texture.gif" alt=""></div>
+      <div class="item" style="--position: 3"><img src="C:\Users\hp\Downloads\canada_texture.gif" alt=""></div>
+      <div class="item" style="--position: 4"><img src="C:\Users\hp\Downloads\cuba_texture.gif" alt=""></div>
+      <div class="item" style="--position: 5"><img src="C:\Users\hp\Downloads\united_kingdom_texture.gif" alt=""></div>
+      <div class="item" style="--position: 6"><img src="C:\Users\hp\Downloads\united_states_of_america_texture.gif" alt=""></div>
+      <div class="item" style="--position: 7"><img src="C:\Users\hp\Downloads\australia_texture.gif" alt=""></div>
+      <div class="item" style="--position: 8"><img src="C:\Users\hp\Downloads\antarctica_texture.gif" alt=""></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const slider = document.querySelector(".slider");
+      const items = document.querySelectorAll(".slider .item");
+      const totalItems = items.length;
+
+      function updateSlider() {
+        items.forEach((item, index) => {
+          let newPosition = (index % totalItems) + 1 ;
+          item.style.setProperty("--position", newPosition);
+          item.style.transform = `
+            rotateY(calc((var(--position) - 100) * (135 / ${totalItems}) * 1deg)) 
+            translateZ(550px)
+          `;
+        });
+      }
+
+      function nextSlide() {
+        updateSlider();
+      }
+
+      setInterval(nextSlide, 350);
+    });
+  </script>
+
+</body>
+</html>
